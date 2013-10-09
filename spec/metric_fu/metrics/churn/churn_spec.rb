@@ -1,4 +1,5 @@
 require "spec_helper"
+MetricFu.metrics_require { 'churn/churn' }
 
 describe MetricFu::ChurnGenerator do
 

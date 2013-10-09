@@ -1,4 +1,3 @@
-# Class opened and modified by requiring a graph engine
 require 'multi_json'
 module MetricFu
   class Grapher

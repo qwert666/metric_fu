@@ -1,6 +1,10 @@
 require 'spec_helper'
+MetricFu.metrics_require { 'hotspots/analysis/analyzer_tables' }
 
 describe MetricFu::AnalyzerTables do
+  before do
+    enable_hotspots
+  end
 
   def analyzer_table(result_hash)
     @analyzer_tables ||= {}

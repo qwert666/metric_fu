@@ -1,3 +1,4 @@
+MetricFu.metrics_require { 'hotspots/analysis/groupings' }
 module MetricFu
   class HotspotProblems
 

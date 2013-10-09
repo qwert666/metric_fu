@@ -1,4 +1,5 @@
 require "spec_helper"
+MetricFu.metrics_require { 'flay/flay_grapher' }
 
 describe FlayGrapher do
   before :each do

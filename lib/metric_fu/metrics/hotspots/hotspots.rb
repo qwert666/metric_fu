@@ -8,6 +8,9 @@ module MetricFu
     end
 
     def initialize(options={})
+      MetricFu::Metric.enabled_metrics.each do |metric|
+        require_hotspot(metric.name)
+      end
       super
     end
 
@@ -26,6 +29,14 @@ module MetricFu
         result[:hotspots][granularity.to_s] = hotspots.map(&:to_hash)
       end
       result
+    end
+
+    private
+
+    def require_hotspot(metric_name)
+      require "metric_fu/metrics/#{metric_name}/#{metric_name}_hotspot"
+    rescue LoadError
+      mf_debug "*** No hotspot for #{metric_name}"
     end
   end
 

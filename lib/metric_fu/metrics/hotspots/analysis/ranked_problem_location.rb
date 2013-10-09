@@ -1,3 +1,5 @@
+MetricFu.lib_require { 'errors/analysis_error' }
+MetricFu.metrics_require { 'hotspots/analysis/problems' }
 module MetricFu
   class HotspotRankedProblemLocation
     MetricFu.data_structures_require { 'location' }

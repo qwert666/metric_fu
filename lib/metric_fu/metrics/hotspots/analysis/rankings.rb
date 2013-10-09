@@ -1,3 +1,8 @@
+MetricFu.metrics_require do
+  [
+    'hotspots/analysis/ranking'
+  ]
+end
 module MetricFu
   class HotspotRankings
 

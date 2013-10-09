@@ -1,4 +1,5 @@
 require "spec_helper"
+MetricFu.metrics_require { 'saikuro/saikuro' }
 
 describe MetricFu::SaikuroGenerator do
   describe "to_h method" do

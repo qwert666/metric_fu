@@ -1,5 +1,4 @@
 # coding: utf-8
-
 class ReekHotspot < MetricFu::Hotspot
 
   # Note that in practice, the prefix reek__ is appended to each one

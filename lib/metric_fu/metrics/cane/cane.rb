@@ -1,3 +1,4 @@
+MetricFu.metrics_require { 'cane/violations' }
 module MetricFu
   class CaneGenerator < Generator
     attr_reader :violations, :total_violations

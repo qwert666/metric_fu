@@ -1,3 +1,5 @@
+MetricFu.formatter_require { 'yaml' }
+MetricFu.metrics_require { 'graph' }
 module MetricFu
   module Formatter
     class HTML

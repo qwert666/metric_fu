@@ -1,4 +1,5 @@
 require "spec_helper"
+MetricFu.metrics_require { 'reek/reek_grapher' }
 
 describe ReekGrapher do
   before :each do

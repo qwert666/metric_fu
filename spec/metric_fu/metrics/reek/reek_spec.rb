@@ -1,4 +1,5 @@
 require "spec_helper"
+MetricFu.metrics_require { 'reek/reek' }
 
 describe MetricFu::ReekGenerator do
   describe "emit" do
@@ -12,6 +13,7 @@ describe MetricFu::ReekGenerator do
     end
   end
 
+  #TODO review tested output
   describe "analyze method" do
     before :each do
       @lines = <<-HERE

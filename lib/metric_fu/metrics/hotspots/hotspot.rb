@@ -1,3 +1,6 @@
+MetricFu.lib_require { 'errors/analysis_error' }
+MetricFu.metrics_require { 'hotspots/analysis/scoring_strategies' }
+
 module MetricFu
   class Hotspot
     def self.metric

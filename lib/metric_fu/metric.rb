@@ -17,6 +17,7 @@ module MetricFu
 
     # TODO: Confirm this catches load errors from requires in subclasses, such as for flog
     def activate
+      MetricFu.metrics_require { default_metric_library_paths }
       @libraries.each {|library| require(library) }
       self.activated = true
     rescue LoadError => e
@@ -97,5 +98,13 @@ module MetricFu
       @libraries << file.strip
     end
 
+    def default_metric_library_paths
+      paths = []
+      paths << generator_path = "#{name}/#{name}"
+      if has_graph?
+          paths << grapher_path   = "#{name}/#{name}_grapher"
+      end
+      paths
+    end
   end
 end

@@ -72,13 +72,19 @@ module MetricFu
     end
 
     def setup
+      MetricFu.logging_require { 'mf_debugger' }
+      Object.send :include, MfDebugger
+      MfDebugger::Logger.debug_on = !!(ENV['MF_DEBUG'] =~ /true/i)
+
       MetricFu.lib_require { 'configuration' }
       MetricFu.lib_require { 'metric' }
-      # TODO: consolidate these setup files
-      MetricFu.lib_require { 'initial_requires' }
-      # Load a few things to make our lives easier elsewhere.
-      MetricFu.lib_require { 'load_files' }
+      Dir.glob(File.join(MetricFu.metrics_dir, '**/init.rb')).each{|init_file|require(init_file)}
       load_user_configuration
+      MetricFu.metrics_require   { 'generator' }
+      MetricFu.lib_require   { 'reporter' }
+      MetricFu.reporting_require { 'result' }
+
+      load_tasks('metric_fu.rake', task_name: 'metrics:all')
     end
 
     def load_user_configuration

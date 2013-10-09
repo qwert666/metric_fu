@@ -1,3 +1,13 @@
+def enable_hotspots(metrics=%w(reek roodi flog churn saikuro flay stats rcov))
+  MetricFu.configure
+  MetricFu.metrics_require do
+    Array(metrics).map do |metric_name|
+      "#{metric_name}/#{metric_name}_hotspot"
+    end
+  end
+  MetricFu::Hotspot.new
+end
+
 def metric_not_activated?(metric_name)
   MetricFu.configuration.configure_metrics
   if MetricFu::Metric.get_metric(metric_name.intern).activate

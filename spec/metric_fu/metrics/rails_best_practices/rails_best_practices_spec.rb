@@ -1,4 +1,5 @@
 require "spec_helper"
+MetricFu.metrics_require { 'rails_best_practices/rails_best_practices' }
 
 describe RailsBestPracticesGenerator do
 

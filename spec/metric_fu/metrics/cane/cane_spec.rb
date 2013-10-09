@@ -1,4 +1,5 @@
 require 'spec_helper'
+MetricFu.metrics_require { 'cane/cane' }
 
 describe CaneGenerator do
   describe "emit method" do

@@ -18,6 +18,7 @@ describe MetricFu::Graph do
 
   describe "setting the date on the graph" do
 
+    # TODO better test
     it "should set the date once for one data point" do
       metric_file = "metric_fu/tmp/_data/20101105.yml"
       MetricFu::Utility.should_receive(:glob).and_return([metric_file].sort)
@@ -30,6 +31,7 @@ describe MetricFu::Graph do
       @graph.generate
     end
 
+    # TODO better test
     it "should set the date when the data directory isn't in the default place" do
       metric_file = "/some/kind/of/weird/directory/somebody/configured/_data/20101105.yml"
       MetricFu::Utility.should_receive(:glob).and_return([metric_file].sort)

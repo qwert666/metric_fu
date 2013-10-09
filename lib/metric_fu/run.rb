@@ -70,7 +70,7 @@ module MetricFu
       end
     end
     def reporter
-      Reporter.new(MetricFu.configuration.formatters)
+      MetricFu::Reporter.new(MetricFu.configuration.formatters)
     end
   end
 end

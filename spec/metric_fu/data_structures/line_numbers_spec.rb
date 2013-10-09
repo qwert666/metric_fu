@@ -1,4 +1,5 @@
 require "spec_helper"
+MetricFu.data_structures_require { 'line_numbers' }
 
 describe MetricFu::LineNumbers do
 

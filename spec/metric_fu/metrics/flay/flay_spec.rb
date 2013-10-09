@@ -1,4 +1,5 @@
 require "spec_helper"
+MetricFu.metrics_require { 'flay/flay' }
 
 describe MetricFu::FlayGenerator do
   describe "emit method" do

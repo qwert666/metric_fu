@@ -1,4 +1,5 @@
 require "spec_helper"
+MetricFu.metrics_require { 'stats/stats' }
 
 describe StatsGenerator do
   describe "emit method" do
@@ -11,6 +12,7 @@ describe StatsGenerator do
     end
   end
 
+  #TODO review tested output
   describe "analyze method" do
     before :each do
       @lines =  <<-HERE.gsub(/^\s*/, "")
