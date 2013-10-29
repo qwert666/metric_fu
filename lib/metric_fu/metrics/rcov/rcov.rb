@@ -1,4 +1,5 @@
 MetricFu.lib_require { 'utility' }
+MetricFu.data_structures_require { 'line_numbers' }
 
 module MetricFu
 
@@ -45,7 +46,7 @@ module MetricFu
 
     def default_command
       reset_output_location
-      test_files = FileList[*options[:test_files]].join(' ')
+      test_files = Dir[*options[:test_files]].join(' ')
       rcov_opts = options[:rcov_opts].join(' ')
       %Q(RAILS_ENV=#{options[:environment]} rcov #{test_files} #{rcov_opts} >> #{default_output_file})
     end
