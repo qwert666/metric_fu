@@ -3,8 +3,11 @@ module MetricFu
   class GemVersion
 
     def initialize
-      gemspec = File.join(MetricFu.root_dir, 'metric_fu.gemspec')
       @gem_spec = Gem::Specification.load(gemspec)
+    end
+
+    def gemspec
+      gemspec = File.join(MetricFu.root_dir, 'metric_fu.gemspec')
     end
 
     def new_dependency(name, version)
@@ -13,8 +16,8 @@ module MetricFu
 
     def gem_runtime_dependencies
       @gem_runtime_dependencies ||= begin
-                                      @gem_spec.dependencies.select{|gem| gem.type == :runtime}.each do |dep|
-                                        dep.name = dep.name.downcase.sub('metric_fu-','')
+                                      @gem_spec.dependencies.select{|gem| gem.type == :runtime}.each do |gem_dep|
+                                        gem_dep.name = gem_dep.name.downcase.sub('metric_fu-','')
                                       end << new_dependency('rcov', ['~> 0.8'])
                                     end
     end
@@ -33,7 +36,20 @@ module MetricFu
 
     RESOLVER = new
     def self.for(name)
-      RESOLVER.for(name)
+      RESOLVER.for(name).dup
+    end
+
+    def self.dependencies
+      RESOLVER.gem_runtime_dependencies.dup
+    end
+
+    def self.dependencies_summary
+      dependencies.map do |gem_dep|
+        {
+          'name' => gem_dep.name,
+          'version' => gem_dep.requirements_list,
+        }
+      end
     end
 
   end

@@ -7,7 +7,7 @@ describe MetricFu::FlayGenerator do
       File.stub(:directory?).and_return(true)
       @flay = MetricFu::FlayGenerator.new(options)
 
-      @flay.should_receive(:`).with("mf-flay  app lib")
+      @flay.should_receive(:run!).with(" app lib")
       output = @flay.emit
     end
 
@@ -16,7 +16,7 @@ describe MetricFu::FlayGenerator do
       File.stub(:directory?).and_return(true)
       @flay = MetricFu::FlayGenerator.new(options)
 
-      @flay.should_receive(:`).with("mf-flay --mass 99  ")
+      @flay.should_receive(:run!).with("--mass 99  ")
       output = @flay.emit
     end
   end

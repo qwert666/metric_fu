@@ -9,9 +9,15 @@ module MetricFu
       :rcov
     end
 
-    def run!(command)
-      mf_debug "** #{command}"
-      `#{command}`
+    def run!(arg)
+      with_env { metric.run_external(args) }
+    end
+
+    def with_env(&block)
+      original_rails_env = ENV['RAILS_ENV']
+      ENV['RAILS_ENV'] = options[:environment]
+      yield
+      ENV['RAILS_ENV'] = original_rails_env
     end
 
     class Line
@@ -28,10 +34,9 @@ module MetricFu
     end
 
     def emit
-      if run_rcov?
-        mf_debug "** Running the specs/tests in the [#{options[:environment]}] environment"
-        run!(command)
-      end
+      return unless run_rcov?
+      mf_debug "** Running the specs/tests in the [#{options[:environment]}] environment"
+      run!(command)
     end
 
     def command
@@ -51,11 +56,11 @@ module MetricFu
       reset_output_location
       test_files = FileList[*options[:test_files]].join(' ')
       rcov_opts = options[:rcov_opts].join(' ')
-      %Q(RAILS_ENV=#{options[:environment]} rcov #{test_files} #{rcov_opts} >> #{default_output_file})
+      %Q(#{test_files} #{rcov_opts})
     end
 
     def analyze
-      output = load_output
+      output = @output
       output = output.split(NEW_FILE_MARKER)
 
       output.shift # Throw away the first entry - it's the execution time etc.
@@ -145,21 +150,12 @@ module MetricFu
     end
 
     def load_output
-      File.read(output_file)
-    end
-
-    def output_file
       if run_rcov?
-        default_output_file
+        @output
       else
-        options.fetch(:external)
+        File.read options.fetch(:external)
       end
     end
-
-    def default_output_file
-      File.join(metric_directory, 'rcov.txt')
-    end
-
 
   end
 end

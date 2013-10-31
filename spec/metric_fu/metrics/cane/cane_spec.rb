@@ -6,56 +6,55 @@ describe CaneGenerator do
     it "should execute cane command" do
       options = {}
       @cane = MetricFu::CaneGenerator.new(options)
-      @cane.should_receive(:`).with("mf-cane")
+      @cane.should_receive(:run!).with("")
       output = @cane.emit
     end
 
     it "should use abc max option" do
       options = {abc_max: 20}
       @cane = MetricFu::CaneGenerator.new(options)
-      @cane.should_receive(:`).with("mf-cane --abc-max 20")
+      @cane.should_receive(:run!).with("--abc-max 20")
       output = @cane.emit
     end
 
     it "should use style max line length option" do
       options = {line_length: 100}
       @cane = MetricFu::CaneGenerator.new(options)
-      @cane.should_receive(:`).with("mf-cane --style-measure 100")
+      @cane.should_receive(:run!).with("--style-measure 100")
       output = @cane.emit
     end
 
     it "should use no-doc if specified" do
       options = {no_doc: 'y'}
       @cane = MetricFu::CaneGenerator.new(options)
-      @cane.should_receive(:`).with("mf-cane --no-doc")
+      @cane.should_receive(:run!).with("--no-doc")
       output = @cane.emit
     end
 
     it "should include doc violations if no_doc != 'y'" do
       options = {no_doc: 'n'}
       @cane = MetricFu::CaneGenerator.new(options)
-      @cane.should_receive(:`).with("mf-cane")
+      @cane.should_receive(:run!).with("")
       output = @cane.emit
     end
 
     it "should use no-readme if specified" do
       options = {no_readme: 'y'}
       @cane = MetricFu::CaneGenerator.new(options)
-      @cane.should_receive(:`).with("mf-cane --no-readme")
+      @cane.should_receive(:run!).with("--no-readme")
       output = @cane.emit
     end
 
     it "should include README violations if no_readme != 'y'" do
       options = {no_readme: 'n'}
       @cane = MetricFu::CaneGenerator.new(options)
-      @cane.should_receive(:`).with("mf-cane")
+      @cane.should_receive(:run!).with("")
       output = @cane.emit
     end
   end
 
   describe "parse cane empty output" do
     before :each do
-      # MetricFu::Configuration.run {}
       File.stub(:directory?).and_return(true)
       options = {}
       @cane = MetricFu::CaneGenerator.new(options)

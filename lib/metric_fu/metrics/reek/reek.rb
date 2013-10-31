@@ -7,8 +7,7 @@ module MetricFu
       :reek
     end
 
-    def run!(files)
-      args = cli_options(files)
+    def run!(args)
       metric.run_external(args)
     end
 
@@ -18,7 +17,8 @@ module MetricFu
         mf_log "Skipping Reek, no files found to analyze"
         @output = ""
       else
-        @output = run!(files)
+        args = cli_options(files)
+        @output = run!(args)
         @output = massage_for_reek_12 if reek_12?
       end
     end

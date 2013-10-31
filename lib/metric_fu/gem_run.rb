@@ -33,7 +33,7 @@ module MetricFu
       handle_argv
       capture_stdout do
         load Gem.bin_path(gem_name, library_name, version)
-      end.split(/\r?\n/).join("\n") #.map(&:strip)
+      end
     end
 
     def handle_argv

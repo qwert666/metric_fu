@@ -7,7 +7,7 @@ describe MetricFu::ReekGenerator do
       reek = MetricFu::ReekGenerator.new(options)
       files_to_analyze = ['lib/foo.rb','lib/bar.rb']
       reek.stub(:files_to_analyze).and_return(files_to_analyze)
-      reek.should_receive(:`).with(/--config lib\/config\/\*\.reek lib\/foo.rb lib\/bar.rb/).and_return("")
+      reek.should_receive(:run!).with(/--config lib\/config\/\*\.reek lib\/foo.rb lib\/bar.rb/).and_return('')
       reek.emit
     end
   end

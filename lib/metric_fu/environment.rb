@@ -106,7 +106,7 @@ module MetricFu
         'Version' =>  version,
         'Verbose Mode' => verbose,
         'Enabled Metrics' => MetricFu::Metric.enabled_metrics.map(&:name),
-        # 'Dependencies' => `gem dependency metric_fu`, # TODO how should we handle this?
+        'Dependencies' => MetricFu::GemVersion.dependencies_summary,
       }
     end
 
