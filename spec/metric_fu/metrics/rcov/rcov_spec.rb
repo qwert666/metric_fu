@@ -28,6 +28,7 @@ describe MetricFu::RcovGenerator do
     end
 
     it "should set the RAILS_ENV" do
+      pending "testing with_env, RAILS_ENV"
       MetricFu::Utility.should_receive(:rm_rf).with(MetricFu::RcovGenerator.metric_directory, :verbose => false)
       MetricFu::Utility.should_receive(:mkdir_p).with(MetricFu::RcovGenerator.metric_directory)
       options = {:environment => 'metrics', :external => nil}

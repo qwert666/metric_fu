@@ -132,6 +132,7 @@ describe MetricFu::Formatter::HTML do
         formatter.finish
         formatter.display_results
       end
+      pending 'reimplement with Launchy'
     end
 
   end
