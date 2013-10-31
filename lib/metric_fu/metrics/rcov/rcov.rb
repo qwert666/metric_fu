@@ -157,6 +157,5 @@ module MetricFu
       File.join(metric_directory, 'rcov.txt')
     end
 
-
   end
 end
