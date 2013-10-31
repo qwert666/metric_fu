@@ -1,4 +1,5 @@
 require 'set'
+MetricFu.lib_require { 'gem_run' }
 # Encapsulates the configuration options for each metric
 module MetricFu
   class Metric
@@ -31,6 +32,21 @@ module MetricFu
     # @return metric run options [Hash]
     def run_options
       default_run_options.merge(configured_run_options)
+    end
+
+    def run
+      not_implemented
+    end
+
+    def run_external(args = run_options.map{|k,v| "--#{k} #{v}"}.join(' ') )
+      runner = GemRun.new({
+        gem_name: name.to_s,
+        metric_name: name.to_s,
+        # version: ,
+        args: args,
+      })
+      mf_debug "Running #{runner.summary}"
+      runner.run.output
     end
 
     def configured_run_options

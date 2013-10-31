@@ -38,6 +38,10 @@ module MetricFu
       @options = options
     end
 
+    def metric
+      MetricFu::Metric.get_metric(self.class.metric)
+    end
+
     @generators = []
     # @return all subclassed generators [Array<MetricFu::Generator>]
     def self.generators

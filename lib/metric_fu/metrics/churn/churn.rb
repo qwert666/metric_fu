@@ -6,6 +6,10 @@ module MetricFu
       :churn
     end
 
+    def run!
+      metric.run_external(build_churn_options)
+    end
+
     def emit
       @output = generate_churn_metrics
     end
@@ -26,7 +30,7 @@ module MetricFu
     private
 
     def generate_churn_metrics
-      ensure_output_is_valid_yaml(churn_code)
+      ensure_output_is_valid_yaml(run!)
     end
 
     def ensure_output_is_valid_yaml(output)
@@ -36,12 +40,6 @@ module MetricFu
       else
         nil
       end
-    end
-
-    def churn_code
-      command = "mf-churn #{build_churn_options}"
-      mf_debug "** #{command}"
-      `#{command}`
     end
 
     def build_churn_options
@@ -57,6 +55,7 @@ module MetricFu
     def has_option?(churn_option)
       options.include?(churn_option)
     end
+
     def churn_options
       {
         :minimum_churn_count => '--minimum_churn_count',

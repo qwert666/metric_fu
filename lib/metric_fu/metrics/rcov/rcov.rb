@@ -9,6 +9,11 @@ module MetricFu
       :rcov
     end
 
+    def run!(command)
+      mf_debug "** #{command}"
+      `#{command}`
+    end
+
     class Line
       attr_accessor :content, :was_run
 
@@ -25,8 +30,7 @@ module MetricFu
     def emit
       if run_rcov?
         mf_debug "** Running the specs/tests in the [#{options[:environment]}] environment"
-        mf_debug "** #{command}"
-        `#{command}`
+        run!(command)
       end
     end
 

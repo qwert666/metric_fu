@@ -5,13 +5,16 @@ module MetricFu
       :roodi
     end
 
-    def emit
+    def run!
       files_to_analyze = options[:dirs_to_roodi].map{|dir| Dir[File.join(dir, "**/*.rb")] }
       files = remove_excluded_files(files_to_analyze.flatten)
       config = options[:roodi_config] ? "-config=#{options[:roodi_config]}" : ""
-      command = %Q(mf-roodi #{config} #{files.join(" ")})
-      mf_debug "** #{command}"
-      @output = `#{command}`
+      args = "#{config} #{files.join(' ')}"
+      metric.run_external(args)
+    end
+
+    def emit
+      @output = run!
     end
 
     def analyze

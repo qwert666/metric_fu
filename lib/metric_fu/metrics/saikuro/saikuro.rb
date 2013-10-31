@@ -8,6 +8,10 @@ module MetricFu
       :saikuro
     end
 
+    def run!(args)
+      metric.run_external(args)
+    end
+
     def emit
       options_string = options.inject("") do |options, option|
         option[0] == :input_directory ? options : options + "--#{option.join(' ')} "
@@ -17,9 +21,7 @@ module MetricFu
         options_string += "--input_directory #{input_dir} "
       end
 
-      command = %Q(mf-saikuro #{options_string})
-      mf_debug "** #{command}"
-      `#{command}`
+      @output = run!(options_string)
     end
 
     def analyze

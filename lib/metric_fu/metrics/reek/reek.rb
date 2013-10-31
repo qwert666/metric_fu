@@ -7,19 +7,21 @@ module MetricFu
       :reek
     end
 
+    def run!(files)
+      args = cli_options(files)
+      metric.run_external(args)
+    end
+
     def emit
       files = files_to_analyze
       if files.empty?
         mf_log "Skipping Reek, no files found to analyze"
         @output = ""
       else
-        command = %Q(mf-reek #{cli_options(files)})
-        mf_debug "** #{command}"
-        @output = `#{command}`
+        @output = run!(files)
         @output = massage_for_reek_12 if reek_12?
       end
     end
-
 
     def analyze
       @matches = @output.chomp.split("\n\n").map{|m| m.split("\n") }

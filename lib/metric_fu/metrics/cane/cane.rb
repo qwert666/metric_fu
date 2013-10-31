@@ -6,10 +6,13 @@ module MetricFu
       :cane
     end
 
+    def run!(args)
+      metric.run_external(args)
+    end
+
     def emit
-      command = %Q{mf-cane#{abc_max_param}#{style_measure_param}#{no_doc_param}#{no_readme_param}}
-      mf_debug "** #{command}"
-      @output = `#{command}`
+      command = "#{abc_max_param}#{style_measure_param}#{no_doc_param}#{no_readme_param}".strip
+      @output = run!(command)
     end
 
     def analyze
