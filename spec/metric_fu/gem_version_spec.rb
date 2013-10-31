@@ -11,8 +11,4 @@ describe MetricFu::GemVersion do
     end
   end
 
-  it 'behaves like metric_fu_requires' do
-    expect(MetricFu::GemVersion.for('saikuro')).to eq(MetricFu::MetricVersion.saikuro)
-  end
-
 end
