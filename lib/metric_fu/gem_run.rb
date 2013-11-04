@@ -31,9 +31,10 @@ module MetricFu
       require 'rubygems'
       gem gem_name, version
       handle_argv
-      capture_stdout do
-        load Gem.bin_path(gem_name, library_name, version)
-      end
+      p "I would execute #{[gem_name, library_name, version, arguments].join(';; ')}"
+      # capture_stdout do
+      #   load Gem.bin_path(gem_name, library_name, version)
+      # end
     end
 
     def handle_argv
