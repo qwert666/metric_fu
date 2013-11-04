@@ -17,9 +17,9 @@ module MetricFu
     def analyze
       problems = JSON.parse(@output)
       @problems = problems["files"].collect do |problem|
-        { file: problem["path"],
-          offences: problem["offences"]
-        }
+        offences = problem["offences"]
+        { file: problem["path"]
+        }.merge(offences.empty? ? {} : {offences: problem["offences"]})
       end
       @summary = problems["summary"]
     end

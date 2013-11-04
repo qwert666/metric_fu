@@ -20,6 +20,7 @@
   <table>
     <tr>
       <th>Severity</th>
+      <th>Cop name</th>
       <th>Description</th>
       <th>Location (line/column)</th>
     </tr>
@@ -27,6 +28,7 @@
     <% problem[:offences].each do |offence| %>
       <tr class='<%= cycle("light", "dark", count) %>'>
         <td><%= offence["severity"] %></td>
+        <td><%= offence["cop_name"] %></td>
         <td><%= offence["message"] %></td>
         <td><%= offence["location"].values.join('/') %></td>
       <% end %>
