@@ -14,27 +14,28 @@
     <td><%= @rubocop[:summary]['inspected_file_count'] %></td>
   </tr>
 </table>
-
 <% @rubocop[:problems].each do |problem| %>
-  <h1><%= link_to_filename(problem[:file]) %></h1>
-  <table>
-    <tr>
-      <th>Severity</th>
-      <th>Cop name</th>
-      <th>Description</th>
-      <th>Location (line/column)</th>
-    </tr>
-    <% count = 0 %>
-    <% problem[:offences].each do |offence| %>
-      <tr class='<%= cycle("light", "dark", count) %>'>
-        <td><%= offence["severity"] %></td>
-        <td><%= offence["cop_name"] %></td>
-        <td><%= offence["message"] %></td>
-        <td><%= offence["location"].values.join('/') %></td>
-      <% end %>
-    <% count += 1 %>
-    </tr>
-  </table>
+  <% unless problem[:offences].empty? %>
+    <h1><%= link_to_filename(problem[:file]) %></h1>
+    <table>
+      <tr>
+        <th>Severity</th>
+        <th>Cop name</th>
+        <th>Description</th>
+        <th>Location (line/column)</th>
+      </tr>
+      <% count = 0 %>
+      <% problem[:offences].each do |offence| %>
+        <tr class='<%= cycle("light", "dark", count) %>'>
+          <td><%= offence["severity"] %></td>
+          <td><%= offence["cop_name"] %></td>
+          <td><%= offence["message"] %></td>
+          <td><%= offence["location"].values.join('/') %></td>
+        <% end %>
+      <% count += 1 %>
+      </tr>
+    </table>
+  <% end %>
 <% end %>
 
 
