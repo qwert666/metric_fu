@@ -80,13 +80,13 @@ describe MetricFu::ChurnGenerator do
     it "returns churn output" do
       @churn.stub(:churn_code).and_return("  master\n#{churn_yaml}")
       result = @churn.emit
-      result.should == churn_yaml
+      expect(result).to eq(churn_yaml)
     end
 
     it "returns nil, when churn result is not yaml" do
       @churn.stub(:churn_code).and_return("  master\n")
       result = @churn.emit
-      result.should be nil
+      expect(result).to be_nil
     end
   end
 end
