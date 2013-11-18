@@ -5,7 +5,7 @@ module MetricFu
     end
 
     def default_run_options
-      config = "#{MetricFu::Io::FileSystem.directory('root_directory')}/.rubocop.yml"
+      config = File.join(File.dirname(__FILE__),'.rubocop.yml')
       {
         :dirs_to_rubocop => MetricFu::Io::FileSystem.directory('code_dirs')
       }.merge(File.exists?(config) ? {:config => config} : {})

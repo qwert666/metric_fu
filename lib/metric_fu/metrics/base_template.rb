@@ -237,6 +237,10 @@ module MetricFu
       @metrics.keys.map {|metric| metric_link(metric.to_s) }
     end
 
+    def gpa_score
+      File.read('tmp/gpa.json') if File.exists?('tmp/gpa.json')
+    end
+
     def metric_link(metric)
       <<-LINK
       <a href="#{metric}.html">

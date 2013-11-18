@@ -1,7 +1,6 @@
 #!/usr/bin/env rake
 require 'bundler/setup'
 
-
 Dir['./gem_tasks/*.rake'].each do |task|
   import(task)
 end
