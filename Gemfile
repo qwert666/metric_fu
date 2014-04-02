@@ -1,5 +1,8 @@
-source 'https://rubygems.org'
+source 'http://rubygems.office'
 
+group :development do
+  gem 'geminabox-rake'
+end
 
 group :test, :coverage do
   # https://github.com/kina/simplecov-rcov-text

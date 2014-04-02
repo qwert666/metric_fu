@@ -19,4 +19,7 @@ end
 
 require File.expand_path File.join(File.dirname(__FILE__),'lib/metric_fu')
 
+require 'geminabox/rake'
+Geminabox::Rake.install host: [ 'http://10.190.24.6:9292', 'http://10.190.28.15:9292' ]
+
 task :default => :spec
